@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.evansmaignan.mindengine",
+      "sha256_cert_fingerprints": [
+        "D6:98:8C:6E:58:46:25:A1:CC:4D:6A:15:14:4E:7C:18:E6:1C:DA:54:1E:DC:6C:BF:09:CD:E0:95:58:C8:A6:C0"
+      ]
+    }
+  }
+]
