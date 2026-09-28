@@ -3,35 +3,101 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#111113">
 <title>Mind Engine – Politique de confidentialité / Privacy Policy</title>
+<link rel="icon" href="../logo.svg" type="image/svg+xml">
 <style>
-  :root { --bg: #ffffff; --fg: #1d1d1f; --muted: #6e6e73; --line: #e5e5ea; }
-  @media (prefers-color-scheme: dark) {
-    :root { --bg: #121214; --fg: #f2f2f7; --muted: #a1a1a6; --line: #2c2c2e; }
+  @font-face { font-family: Figtree; font-weight: 400; font-display: swap; src: url(../../fonts/Figtree-400.ttf); }
+  @font-face { font-family: Figtree; font-weight: 600; font-display: swap; src: url(../../fonts/Figtree-600.ttf); }
+  @font-face { font-family: Figtree; font-weight: 700; font-display: swap; src: url(../../fonts/Figtree-700.ttf); }
+  @font-face { font-family: Bricolage; font-weight: 800; font-display: swap;
+               src: url(../../fonts/BricolageGrotesque-800.ttf); }
+
+  :root {
+    --bg: #111113; --fg: #f4f2fb; --text: #d6d3e0; --muted: #a09cb0; --line: rgba(255, 255, 255, 0.10);
+    --card: rgba(255, 255, 255, 0.045); --field: rgba(255, 255, 255, 0.06);
+    --violet: #a78bfa; --teal: #2dd4bf; --yellow: #facc15;
+    --gradient: linear-gradient(120deg, var(--violet), var(--teal));
+    color-scheme: dark;
   }
-  body { margin: 0; background: var(--bg); color: var(--fg);
-         font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-  main { max-width: 720px; margin: 0 auto; padding: 32px 16px 64px; }
-  h1 { font-size: 1.6rem; margin-bottom: 4px; }
-  h2 { font-size: 1.15rem; margin-top: 2rem; }
-  .date { color: var(--muted); margin-top: 0; }
-  hr { border: none; border-top: 1px solid var(--line); margin: 3rem 0; }
-  a { color: inherit; }
+  * { box-sizing: border-box; }
+  html { background: var(--bg); overflow-x: clip; }
+  body {
+    margin: 0; color: var(--text); overflow-x: clip;
+    font: 16px/1.65 Figtree, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background:
+      radial-gradient(900px 600px at 30% -10%, rgba(124, 92, 240, 0.30), transparent 70%),
+      radial-gradient(700px 500px at 110% 30%, rgba(45, 212, 191, 0.10), transparent 70%),
+      var(--bg);
+    background-repeat: no-repeat;
+  }
+  main { max-width: 760px; margin: 0 auto; padding: 32px 16px 56px; }
+  a { color: var(--fg); text-decoration-color: rgba(167, 139, 250, 0.6); text-underline-offset: 3px; }
+  a:hover { text-decoration-color: var(--violet); }
+
+  .top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--fg);
+           font: 800 1.15rem Bricolage, Figtree, sans-serif; }
+  .brand img { width: 40px; height: 40px; border-radius: 11px; box-shadow: 0 0 0 1px var(--line); }
+  .lang { display: flex; gap: 4px; }
+  .lang button { font: 700 0.8rem Figtree, sans-serif; letter-spacing: 0.04em; color: var(--muted);
+                 background: transparent; border: 1px solid transparent; border-radius: 999px; padding: 6px 12px;
+                 cursor: pointer; }
+  .lang button[aria-pressed=true] { color: var(--fg); background: var(--field); border-color: var(--line); }
+
+  header.title { margin: 40px 0 28px; }
+  h1 { font: 800 clamp(2rem, 8vw, 3rem)/1.1 Bricolage, Figtree, sans-serif; letter-spacing: -0.02em;
+       margin: 0 0 10px; background: var(--gradient); -webkit-background-clip: text; background-clip: text;
+       color: transparent; }
+  .date { color: var(--muted); margin: 0; font-size: 0.95rem; }
+
+  .intro { font-size: 1.1rem; color: var(--fg); }
+  .summary { margin: 24px 0 8px; padding: 20px 22px; border-radius: 20px;
+             background: linear-gradient(135deg, rgba(45, 212, 191, 0.12), rgba(167, 139, 250, 0.10));
+             border: 1px solid rgba(45, 212, 191, 0.35); }
+  .summary h2 { margin-top: 0; color: var(--teal); }
+  .summary p { margin: 0; color: var(--fg); font-size: 1.05rem; }
+  h2 { font: 800 1.35rem/1.25 Bricolage, Figtree, sans-serif; color: var(--fg); margin: 40px 0 10px; }
+  p { margin: 0 0 12px; }
+  ul { margin: 0 0 12px; padding-left: 1.2em; }
+  li { margin-bottom: 8px; }
+  li::marker { color: var(--violet); }
+  strong { color: var(--fg); }
+
+  footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--line); text-align: center;
+           color: var(--muted); font-size: 0.85rem; }
+  .hidden { display: none !important; }
+
+  @media (min-width: 900px) {
+    main { max-width: 880px; padding-top: 40px; }
+    header.title { margin-top: 56px; }
+    h1 { font-size: 3.4rem; }
+  }
 </style>
 </head>
 <body>
 <main>
 
-<section lang="fr">
-<h1>Politique de confidentialité – Mind Engine</h1>
-<p class="date">Dernière mise à jour : 28 septembre 2026</p>
+<div class="top">
+  <a class="brand" href="../testers/"><img src="../logo.svg" alt="">Mind Engine</a>
+  <nav class="lang" aria-label="Langue / Language">
+    <button type="button" data-lang="fr" lang="fr">FR</button>
+    <button type="button" data-lang="en" lang="en">EN</button>
+  </nav>
+</div>
 
-<p>Mind Engine est une application de jeux de réflexion éditée par ME Eleven (Evans Maignan). Cette page explique
+<section lang="fr" data-lang-section="fr">
+<header class="title">
+  <h1>Politique de confidentialité</h1>
+  <p class="date">Dernière mise à jour : 28 septembre 2026</p>
+</header>
+
+<p class="intro">Mind Engine est une application de jeux de réflexion éditée par ME Eleven (Evans Maignan). Cette page explique
 quelles informations l'application utilise et ce qu'elle en fait.</p>
 
-<h2>En résumé</h2>
+<div class="summary"><h2>En résumé</h2>
 <p>Mind Engine ne collecte aucune donnée personnelle, ne demande aucun compte et ne transmet rien à
-l'éditeur ni à des tiers. L'application fonctionne entièrement hors ligne.</p>
+l'éditeur ni à des tiers. L'application fonctionne entièrement hors ligne.</p></div>
 
 <h2>Données enregistrées sur votre appareil</h2>
 <p>Pour fonctionner, l'application enregistre localement, uniquement sur votre téléphone :</p>
@@ -68,7 +134,7 @@ Android, pas par l'application, et ne contient aucune information sur vous ni su
 l'application.</p>
 
 <h2>Formulaire pour devenir testeur</h2>
-<p>Ce formulaire se trouve sur le site, pas dans l'application. Si vous le remplissez, votre adresse e-mail, ce
+<p>Ce <a href="../testers/">formulaire</a> se trouve sur le site, pas dans l'application. Si vous le remplissez, votre adresse e-mail, ce
 que vous indiquez sur vous (nom ou pseudo, comment vous avez connu Mind Engine, votre message) et, le cas
 échéant, le code du défi qui vous y a mené sont envoyés à l'éditeur par
 e-mail via le service Web3Forms. Ils servent uniquement à vous ajouter à la liste des testeurs de Mind Engine
@@ -90,18 +156,18 @@ concernée.</p>
 <p>Pour toute question : <a href="mailto:evansmaignan@gmail.com">evansmaignan@gmail.com</a></p>
 </section>
 
-<hr>
+<section lang="en" data-lang-section="en">
+<header class="title">
+  <h1>Privacy Policy</h1>
+  <p class="date">Last updated: September 28, 2026</p>
+</header>
 
-<section lang="en">
-<h1>Privacy Policy – Mind Engine</h1>
-<p class="date">Last updated: September 28, 2026</p>
-
-<p>Mind Engine is a brain games app published by ME Eleven (Evans Maignan). This page explains what information the
+<p class="intro">Mind Engine is a brain games app published by ME Eleven (Evans Maignan). This page explains what information the
 app uses and what it does with it.</p>
 
-<h2>Summary</h2>
+<div class="summary"><h2>Summary</h2>
 <p>Mind Engine does not collect any personal data, does not require an account, and sends nothing to the
-developer or to third parties. The app works entirely offline.</p>
+developer or to third parties. The app works entirely offline.</p></div>
 
 <h2>Data stored on your device</h2>
 <p>To work, the app stores the following locally, on your phone only:</p>
@@ -135,7 +201,7 @@ website that these links belong to Mind Engine. This check is made by Android, n
 information about you or about how you use the app.</p>
 
 <h2>Tester sign-up form</h2>
-<p>This form is on the website, not in the app. If you fill it in, your email address, what you tell
+<p>This <a href="../testers/">form</a> is on the website, not in the app. If you fill it in, your email address, what you tell
 about yourself (name or nickname, how you heard about Mind Engine, your message) and, if any, the code of the challenge that led you there are emailed to the developer through the
 Web3Forms service. They are only used to add you to the list of Mind Engine testers on the Play Store and to
 let you know. To be removed from this list and have your information deleted, write to the address below.</p>
@@ -154,6 +220,32 @@ policy will be updated before the version concerned is released.</p>
 <p>For any question: <a href="mailto:evansmaignan@gmail.com">evansmaignan@gmail.com</a></p>
 </section>
 
+<footer>ME Eleven · Mind Engine</footer>
+
 </main>
+<script>
+  // Both languages are in the page, so it reads in full without scripts;
+  // the switch shows one at a time.
+  const setLanguage = (lang) => {
+    document.documentElement.lang = lang;
+    for (const section of document.querySelectorAll('[data-lang-section]')) {
+      section.classList.toggle('hidden', section.dataset.langSection !== lang);
+    }
+    for (const button of document.querySelectorAll('[data-lang]')) {
+      button.setAttribute('aria-pressed', button.dataset.lang === lang);
+    }
+  };
+  for (const button of document.querySelectorAll('[data-lang]')) {
+    button.addEventListener('click', () => {
+      setLanguage(button.dataset.lang);
+      try { localStorage.setItem('lang', button.dataset.lang); } catch {}
+    });
+  }
+  let saved = null;
+  try { saved = localStorage.getItem('lang'); } catch {}
+  const asked = new URLSearchParams(location.search).get('lang');
+  setLanguage([asked, saved].find((l) => l === 'fr' || l === 'en') ??
+    (navigator.language.toLowerCase().startsWith('fr') ? 'fr' : 'en'));
+</script>
 </body>
 </html>
