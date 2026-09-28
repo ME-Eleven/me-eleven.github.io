@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="g" gradientUnits="userSpaceOnUse" x1="300" y1="200" x2="724" y2="860">
+      <stop offset="0" stop-color="#A78BFA"/>
+      <stop offset="1" stop-color="#2DD4BF"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="512" cy="430" r="300" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FACC15" stop-opacity="0.30"/>
+      <stop offset="1" stop-color="#FACC15" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1024" height="1024" fill="#111113"/>
+  <g transform="translate(0 -44)">
+  <circle cx="512" cy="430" r="300" fill="url(#glow)"/>
+
+  <!-- bulb globe -->
+  <path d="M372 700 C372 640 300 600 300 470 A212 212 0 1 1 724 470 C724 600 652 640 652 700 Z"
+        fill="none" stroke="url(#g)" stroke-width="28" stroke-linejoin="round"/>
+
+  <!-- brain (inside the globe) -->
+  <g transform="translate(512 455) scale(.86) translate(-512 -412)" fill="none" stroke="url(#g)" stroke-width="22" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M512 290 C480 250 410 262 405 320 C360 328 350 395 385 415 C355 445 372 510 425 512 C430 552 490 565 512 535
+             C534 565 594 552 599 512 C652 510 669 445 639 415 C674 395 664 328 619 320 C614 262 544 250 512 290 Z"/>
+    <path d="M512 290 V535"/>
+    <path d="M405 320 C430 335 445 355 440 385"/>
+    <path d="M619 320 C594 335 579 355 584 385"/>
+  </g>
+
+  <!-- glowing circuit filament -->
+  <g fill="none" stroke="#FACC15" stroke-width="12" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M512 700 V600 L450 540 V470 M512 600 L574 540 V470"/>
+  </g>
+  <g fill="#FACC15">
+    <circle cx="450" cy="462" r="15"/>
+    <circle cx="574" cy="462" r="15"/>
+    <circle cx="512" cy="600" r="15"/>
+  </g>
+
+  <!-- screw base -->
+  <g fill="none" stroke="url(#g)" stroke-width="26" stroke-linecap="round">
+    <path d="M382 745 H642"/>
+    <path d="M396 800 H628"/>
+    <path d="M440 855 H584"/>
+  </g>
+  </g>
+</svg>
