@@ -189,8 +189,79 @@
     invalidBody: 'This records link is damaged or incomplete. Ask your friend to send it again.',
   };
 
-  // Reads a code as the app writes it: 1~id~name~day~record.v.v.v.v.v~…
+  // The records a compact code names by their place: the app's list, which
+  // only ever grows at the end.
+  const compactIds = [
+    'minesweeper', 'minesweeper_blitz', 'eclipse', 'eclipse_blitz',
+    'snapshot', 'snapshot_blitz', 'balance_puzzle', 'balance_puzzle_blitz',
+    'star_battle', 'star_battle_blitz', 'game_2048', 'game_2048_time',
+    'game_2048_blitz', 'numberlink', 'numberlink_blitz', 'picross',
+    'picross_blitz', 'rewind', 'rewind_blitz', 'intrus', 'intrus_blitz',
+    'constellation', 'constellation_blitz', 'mental_math', 'mental_math_blitz',
+    'block_smash', 'block_smash_blitz', 'cube_counter', 'cube_counter_blitz',
+    'sudoku', 'sudoku_blitz', 'shikaku', 'shikaku_blitz', 'serpentin',
+    'serpentin_blitz', 'sculpteur', 'sculpteur_blitz', 'labycalcul',
+    'labycalcul_blitz', 'cross_sums', 'cross_sums_blitz',
+    ...['random', 'chosen'].flatMap((kind) => counts.flatMap((n) =>
+      durations.map((s) => `marathon_${kind}_${n}g_${s}s`))),
+    ...['random', 'chosen'].flatMap((kind) => counts.map((n) => `speedrun_${kind}_${n}g`)),
+  ];
+
+  // Reads a compact code as the app writes it: `2`, then base64url bits —
+  // see RecordsSnapshot.encodeCompact in the app.
+  const parseCompact = (code) => {
+    const b64 = code.replace(/-/g, '+').replace(/_/g, '/');
+    const bytes = Uint8Array.from(atob(b64 + '='.repeat((4 - b64.length % 4) % 4)), (c) => c.charCodeAt(0));
+    let pos = 0;
+    const bit = () => {
+      if (pos >= bytes.length * 8) throw new Error('cut short');
+      const b = (bytes[pos >> 3] >> (7 - (pos & 7))) & 1;
+      pos++;
+      return b;
+    };
+    const read = (n) => { let v = 0; for (let i = 0; i < n; i++) v = v * 2 + bit(); return v; };
+    const golomb = (k) => {
+      let zeros = 0;
+      while (bit() === 0) if (++zeros > 40) throw new Error('too long');
+      return 2 ** (zeros + k) + read(zeros + k) - 2 ** k;
+    };
+    const idLength = read(4) + 4;
+    if (idLength > 16) return null;
+    let id = 0n;
+    const idBits = (36n ** BigInt(idLength) - 1n).toString(2).length;
+    for (let i = 0; i < idBits; i++) id = id * 2n + BigInt(bit());
+    if (!/^[0-9a-z]{4,16}$/.test(id.toString(36).padStart(idLength, '0'))) return null;
+    const nameLength = golomb(0);
+    if (nameLength > 96) return null;
+    const nameBytes = Uint8Array.from({ length: nameLength }, () => read(8));
+    const name = new TextDecoder('utf-8', { fatal: true }).decode(nameBytes).trim();
+    if (!name || [...name].length > 24) return null;
+    const day = read(16);
+    const records = {};
+    const count = golomb(0);
+    let next = 0;
+    for (let n = 0; n < count; n++) {
+      const index = next + golomb(0);
+      next = index + 1;
+      const mask = read(5);
+      if (!mask) return null;
+      const order = read(4);
+      const values = {};
+      levels.forEach((level, i) => { if (mask & (1 << (4 - i))) values[level] = golomb(order); });
+      if (index < compactIds.length) records[compactIds[index]] = values;
+    }
+    // Nothing but the last byte's padding may follow.
+    if (bytes.length * 8 - pos >= 8) return null;
+    while (pos < bytes.length * 8) if (bit()) return null;
+    return { name, day: new Date(day * 86400000), records };
+  };
+
+  // Reads a code in either form the app writes: the compact one links carry,
+  // or the long one, 1~id~name~day~record.v.v.v.v.v~…
   const parse = (code) => {
+    if (code.startsWith('2')) {
+      try { return parseCompact(code.slice(1)); } catch { return null; }
+    }
     const parts = code.split('~');
     if (parts.length < 4 || parts[0] !== '1' || !/^[0-9a-z]{4,16}$/.test(parts[1])) return null;
     let name, day;
