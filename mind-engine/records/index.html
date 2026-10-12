@@ -127,6 +127,7 @@
 
 <div class="panel hidden" id="panel">
   <div>
+    <a class="button hidden" id="open-app" data-t="openApp"></a>
     <a class="button" id="compare" data-t="compare"></a>
     <a class="button ghost" id="store" href="https://play.google.com/store/apps/details?id=com.evansmaignan.mindengine"
        data-t="store"></a>
@@ -172,7 +173,7 @@
     marathon: ['Marathon aléatoire', 'Marathon au choix'], speedrun: ['Speedrun aléatoire', 'Speedrun au choix'],
     gameCount: (n) => n + ' jeux', perGame: (s) => s + ' s par jeu', totalTime: 'Temps total',
     target: "Temps pour l'objectif", nothing: 'Aucun record dans ce mode.',
-    compare: 'Me comparer sur Mind Engine Web', store: 'Sur Android ? Télécharger sur Google Play',
+    openApp: "J'ai le jeu : me comparer dans l'app", compare: 'Me comparer sur Mind Engine Web', store: 'Sur Android ? Télécharger sur Google Play',
     invalidTitle: 'Lien incomplet',
     invalidBody: "Ce lien de records est abîmé ou incomplet. Demande à ton ami de te le renvoyer.",
   };
@@ -184,7 +185,7 @@
     marathon: ['Random Marathon', 'Chosen Marathon'], speedrun: ['Random Speedrun', 'Chosen Speedrun'],
     gameCount: (n) => n + ' games', perGame: (s) => s + ' s per game', totalTime: 'Total time',
     target: 'Time to target', nothing: 'No records in this mode.',
-    compare: 'Compare with me on Mind Engine Web', store: 'On Android? Get it on Google Play',
+    openApp: 'I have the game: compare in the app', compare: 'Compare with me on Mind Engine Web', store: 'On Android? Get it on Google Play',
     invalidTitle: 'Broken link',
     invalidBody: 'This records link is damaged or incomplete. Ask your friend to send it again.',
   };
@@ -295,7 +296,8 @@
     return e;
   };
 
-  const code = decodeURIComponent(location.hash.slice(1));
+  const code = decodeURIComponent(location.hash.slice(1)) ||
+    (new URLSearchParams(location.search).get('records') ?? '');
   const snapshot = code ? parse(code) : null;
   let t = fr, tab = 0, lang = 'fr';
 
@@ -412,6 +414,21 @@
     document.getElementById('panel').classList.remove('hidden');
     // The web version compares them with the records kept in this browser.
     document.getElementById('compare').href = '../play/?records=' + encodeURIComponent(code);
+    // Android may show this page even with the app installed (a link opened
+    // from a messaging app, links not verified yet): this button opens the
+    // app all the same. An intent link spends its fragment on its settings,
+    // so the code goes in the query; without the app, it falls back to Play.
+    if (/Android/.test(navigator.userAgent)) {
+      const store = document.getElementById('store');
+      const openApp = document.getElementById('open-app');
+      openApp.href = 'intent://me-eleven.github.io/mind-engine/records/?records=' + encodeURIComponent(code) +
+        '#Intent;scheme=https;package=com.evansmaignan.mindengine;S.browser_fallback_url=' +
+        encodeURIComponent(store.href) + ';end';
+      openApp.classList.remove('hidden');
+      const compare = document.getElementById('compare');
+      compare.classList.add('ghost');
+      store.classList.add('hidden');
+    }
     // An iPhone has no Play Store: the web version is its way in.
     if (/iPhone|iPad|iPod/.test(navigator.userAgent)) document.getElementById('store').classList.add('hidden');
   } else {
