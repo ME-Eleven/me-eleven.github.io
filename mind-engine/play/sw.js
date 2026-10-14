@@ -1,14 +1,14 @@
 'use strict';
 
 // Written by tool/build_web.dart: do not edit.
-const CACHE = 'mind-engine-ebc4d8e5';
+const CACHE = 'mind-engine-3bc299f1';
 const FILES = [
   "./",
   "assets/AssetManifest.bin",
   "assets/AssetManifest.bin.json",
   "assets/FontManifest.json",
   "assets/NOTICES",
-  "assets/assets/audio/music/ambiance.wav",
+  "assets/assets/audio/music/ambiance.m4a",
   "assets/assets/audio/sfx/achievement.wav",
   "assets/assets/audio/sfx/coin.wav",
   "assets/assets/audio/sfx/coinShower.wav",

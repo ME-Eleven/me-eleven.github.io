@@ -47,4 +47,42 @@ if ('serviceWorker' in navigator) {
   });
 }
 
+// On an iPhone the app is drawn under the status bar (black-translucent, in
+// index.html). For that the page has to cover the whole screen: Flutter
+// writes its own viewport meta tag, so viewport-fit=cover is added to it.
+// The safe area (status bar, notch, home indicator) is then read from CSS
+// and handed to the app, which keeps its content clear of it.
+(() => {
+  const coverScreen = () => {
+    for (const meta of document.querySelectorAll('meta[name="viewport"]')) {
+      if (!meta.content.includes('viewport-fit')) {
+        meta.content += ', viewport-fit=cover';
+      }
+    }
+  };
+  new MutationObserver(coverScreen).observe(document.head, { childList: true });
+  coverScreen();
+
+  const probe = document.createElement('div');
+  probe.style.cssText =
+    'position: fixed; visibility: hidden; pointer-events: none; ' +
+    'padding: env(safe-area-inset-top) env(safe-area-inset-right) ' +
+    'env(safe-area-inset-bottom) env(safe-area-inset-left);';
+  document.documentElement.appendChild(probe);
+
+  window.mindEngineSafeArea = (onChange) => {
+    const send = () => {
+      const style = getComputedStyle(probe);
+      onChange(
+        parseFloat(style.paddingTop) || 0,
+        parseFloat(style.paddingRight) || 0,
+        parseFloat(style.paddingBottom) || 0,
+        parseFloat(style.paddingLeft) || 0,
+      );
+    };
+    send();
+    window.addEventListener('resize', send);
+  };
+})();
+
 _flutter.loader.load();
