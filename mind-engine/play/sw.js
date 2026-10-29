@@ -1,7 +1,7 @@
 'use strict';
 
 // Written by tool/build_web.dart: do not edit.
-const CACHE = 'mind-engine-6fce1e8c';
+const CACHE = 'mind-engine-24d89243';
 const FILES = [
   "./",
   "assets/AssetManifest.bin",
@@ -52,6 +52,31 @@ const FILES = [
   "assets/assets/fonts/Figtree-600.ttf",
   "assets/assets/fonts/Figtree-700.ttf",
   "assets/assets/fonts/Figtree-800.ttf",
+  "assets/assets/mascot/filou/book.png",
+  "assets/assets/mascot/filou/calendar.png",
+  "assets/assets/mascot/filou/cheer.png",
+  "assets/assets/mascot/filou/clap.png",
+  "assets/assets/mascot/filou/coins.png",
+  "assets/assets/mascot/filou/confetti.png",
+  "assets/assets/mascot/filou/explain.png",
+  "assets/assets/mascot/filou/head.png",
+  "assets/assets/mascot/filou/hello.png",
+  "assets/assets/mascot/filou/idea.png",
+  "assets/assets/mascot/filou/juggle.png",
+  "assets/assets/mascot/filou/magnifier.png",
+  "assets/assets/mascot/filou/pencil.png",
+  "assets/assets/mascot/filou/phone.png",
+  "assets/assets/mascot/filou/proud.png",
+  "assets/assets/mascot/filou/puzzle.png",
+  "assets/assets/mascot/filou/run.png",
+  "assets/assets/mascot/filou/sad.png",
+  "assets/assets/mascot/filou/sit.png",
+  "assets/assets/mascot/filou/sleep.png",
+  "assets/assets/mascot/filou/surprised.png",
+  "assets/assets/mascot/filou/think.png",
+  "assets/assets/mascot/filou/thumbs.png",
+  "assets/assets/mascot/filou/trophy.png",
+  "assets/assets/mascot/filou/worried.png",
   "assets/fonts/MaterialIcons-Regular.otf",
   "assets/packages/cupertino_icons/assets/CupertinoIcons.ttf",
   "assets/packages/flutter_local_notifications_web/web/notifications_service_worker.js",
