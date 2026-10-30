@@ -1,7 +1,7 @@
 'use strict';
 
 // Written by tool/build_web.dart: do not edit.
-const CACHE = 'mind-engine-30d30157';
+const CACHE = 'mind-engine-deed0620';
 const FILES = [
   "./",
   "assets/AssetManifest.bin",
